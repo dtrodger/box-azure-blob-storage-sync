@@ -1,0 +1,10 @@
+*.json
+data/stream_position.csv
+venv/
+data/env/dev.yml
+data/env/prod.yml
+data/log/*.log
+__pycache__
+.DS_Store
+.idea/
+.pytest_cache/

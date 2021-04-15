@@ -1,0 +1,61 @@
+azure:
+  blob_connection_string: ""
+  blob_container_name: ""
+box:
+  as_user_id: "9676033041"
+  jwt_auth:
+    boxAppSettings:
+      appAuth:
+        passphrase: null
+        privateKey: ""
+        publicKeyID: null
+      clientID: null
+      clientSecret: null
+    enterpriseID: ""
+  seed_datetime_folder_index: "seconds"
+  seed_datetime_since: "2020-04-11T00:00:00"
+  seed_datetime_until: "2020-04-12T00:00:00"
+  seed_folder_id: "110269942225"
+  monitor_folder_id: "110269658072"
+  final_folder_id: "110269942225"
+log:
+  disable_existing_loggers: false
+  formatters:
+    verbose:
+      format: '[%(asctime)s] [%(levelname)s] %(filename)s %(lineno)d %(message)s'
+  handlers:
+    error_file_handler:
+      backupCount: 20
+      class: logging.handlers.RotatingFileHandler
+      encoding: utf8
+      filename: box-consulting-agent-test.error.log
+      formatter: verbose
+      level: ERROR
+      maxBytes: 10485760
+      mode: w
+    info_file_handler:
+      backupCount: 20
+      class: logging.handlers.RotatingFileHandler
+      encoding: utf8
+      filename: box-consulting-agent-test.info.log
+      formatter: verbose
+      level: INFO
+      maxBytes: 10485760
+      mode: w
+    stdout:
+      class: logging.StreamHandler
+      formatter: verbose
+      level: DEBUG
+      stream: ext://sys.stdout
+  loggers:
+    boxsdk:
+      handlers:
+      - error_file_handler
+      level: ERROR
+  root:
+    handlers:
+    - stdout
+    - error_file_handler
+    - info_file_handler
+    level: DEBUG
+  version: 1

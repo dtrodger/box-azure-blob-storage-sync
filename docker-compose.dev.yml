@@ -1,0 +1,21 @@
+version: '3'
+services:
+  box-to-azure-dev:
+    container_name: box-to-azure-dev
+    build:
+      context: .
+      dockerfile: images/box_to_azure/Dockerfile.dev
+    depends_on:
+      - seed-folders-dev
+    networks:
+      - box-dev
+  seed-folders-dev:
+    container_name: seed-folders-dev
+    build:
+      context: .
+      dockerfile: images/seed_folders/Dockerfile.dev
+    networks:
+      - box-dev
+networks:
+  box-dev:
+    driver: "bridge"

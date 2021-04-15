@@ -1,0 +1,16 @@
+FROM python:3.8
+
+WORKDIR /home/folder_monitor
+ENV PYTHONPATH "${PYTHONPATH}:/home/folder_monitor"
+
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+COPY . .
+RUN groupadd folder_monitor_group && \
+    useradd -m -g folder_monitor_group -s /bin/bash folder_monitor && \
+    touch /home/folder_monitor/data/log/folder_monitor.info.log && \
+    touch /home/folder_monitor/data/log/folder_monitor.error.log && \
+    chown -R folder_monitor:folder_monitor_group /home/folder_monitor
+
+USER folder_monitor
+CMD ["python", "src/main.py", "seed-folders", "-e", "dev"]
