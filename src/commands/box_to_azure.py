@@ -5,6 +5,7 @@ import io
 
 import azure.storage.blob as azure_blob_storage
 import boxsdk
+import click
 
 from src import utils
 from src import box
@@ -16,7 +17,11 @@ log = logging.getLogger(__name__)
 FILE_CREATED_AT_DATETIME_FORMAT = "%Y-%m-%dT%H:%M:%S"
 
 
-def box_to_azure_blob_storage(env: str) -> None:
+@click.command()
+@click.option(
+    "-e", "--env", default="dev", help="env environment alias", type=str,
+)
+def box_to_azure(env: str) -> None:
     config = utils.load_configuration(env)
     utils.configure_logging(config)
     log.info("starting State of Florida Box Platform application")

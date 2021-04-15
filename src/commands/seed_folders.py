@@ -4,6 +4,7 @@ import logging
 from typing import Optional, Dict
 
 import boxsdk
+import click
 
 from src import utils
 from src import box
@@ -40,7 +41,11 @@ def create_and_cache_folder(
     return folder_path_map
 
 
-def seed_datetime_folders(env: str) -> None:
+@click.command()
+@click.option(
+    "-e", "--env", default="dev", help="env environment alias", type=str,
+)
+def seed_folders(env: str) -> None:
     config = utils.load_configuration(env)
     utils.configure_logging(config)
     log.info("starting Box Consulting Agent")
